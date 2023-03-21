@@ -1,0 +1,41 @@
+<%- include('../partials/meta.ejs') %>
+    <title>Events</title>
+
+    <link rel='stylesheet' href='/css/events.css'>
+    <%- include('../partials/header.ejs') %>
+        <main class="container">
+            <div class="row">
+                <div class="col-sm-14 col-md-13 col-lg-12 col-xl-11">
+                    <div id="pg-main-text">
+                        <ul id="pg-main-list1">
+                            <% if(events.length) {%>
+                                <h3 id="pg-header1">Meetups</h3>
+                                <% events.forEach(event=> {%>
+                                    <% if(event.category==='meetup' ) {%>
+                                        <li class="d-flex mb-3"><a href="events/<%=event.id%>">
+                                                <%= event.title%>
+                                            </a></li>
+                                        <%}%>
+                                            <%});%>
+                        </ul>
+                        <ul id="pg-main-list2">
+                            <h3 id="pg-header2">Workshops</h3>
+                            <% events.forEach(event=> {%>
+                                <% if(event.category==='workshop' ) {%>
+                                    <li class="d-flex mb-3"><a href="events/<%=event.id%>">
+                                            <%= event.title%>
+                                        </a></li>
+                                    <%}%>
+                                        <%});%>
+
+                        </ul>
+                        <%} else { %>
+                            <h3>There are no code meetups or workshops available currently.</h3>
+                            <% } %>
+
+
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('../partials/footer.ejs') %>

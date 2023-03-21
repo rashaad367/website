@@ -1,0 +1,128 @@
+body {
+    background-color: #cddbe9 !important;
+}
+
+header,
+footer {
+    background-image: url(../images/Hexagon.svg);
+}
+
+.custom-bg {
+    background-color: darkslategrey;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.9;
+}
+
+form {
+    position: relative;
+    top: -1rem;
+}
+
+#pg-header {
+    position: relative;
+    left: 10rem;
+    width: fit-content;
+}
+
+#pg-main-para {
+    position: relative;
+    left: 10rem;
+    width: fit-content;
+}
+
+header a,
+footer a {
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-decoration: none;
+}
+
+header a:hover,
+footer a:hover {
+    color: rgb(85, 193, 230);
+}
+
+hr {
+    width: 98%;
+    background-color: #fff;
+    height: 4px;
+}
+
+#logo-image {
+    width: 8rem;
+    height: 4rem;
+    border-radius: .4rem;
+    margin-top: 1rem;
+}
+
+#event-label {
+    position: relative;
+    top: -0.5rem;
+}
+
+#nav1-options {
+    position: relative;
+    top: 0.5rem;
+}
+
+input,
+select,
+textarea {
+    position: relative;
+    left: -6rem;
+}
+
+#details {
+    resize: none;
+}
+
+i {
+    color: #fff;
+}
+
+i:hover {
+    color: rgb(85, 193, 230);
+}
+
+@media only screen and (min-width: 80px) and (max-width: 480px) {
+
+    input,
+    select,
+    textarea {
+        position: relative;
+        left: 0;
+    }
+
+    main {
+        margin-bottom: 15vh;
+        /*puts footer below text*/
+    }
+
+    #nav1-options {
+        position: relative;
+        left: 3.3rem;
+    }
+
+    #logo-image {
+        position: relative;
+        left: -2.1rem;
+        width: 16rem;
+    }
+
+    #event-label {
+        position: relative;
+        left: -2rem;
+    }
+
+    #nav3-options {
+        position: relative;
+        left: -2rem;
+    }
+
+    #social-icons {
+        position: relative;
+        left: 3rem;
+    }
+}

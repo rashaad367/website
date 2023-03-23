@@ -13,7 +13,7 @@ const app = express();
 // configure app
 let port = 3000;
 let host = 'localhost';
-let url = "mongodb+srv://rjone177:vwG1QQnmCYmWCZT3@cluster0.mc0b5ro.mongodb.net/?retryWrites=true&w=majority";
+let url = "mongodb+srv://rjone177:vwG1QQnmCYmWCZT3@cluster0.mc0b5ro.mongodb.net/project3?retryWrites=true&w=majority";
 app.set('view engine', 'ejs');
 
 //connect to MongoDB

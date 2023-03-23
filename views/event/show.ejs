@@ -49,9 +49,14 @@
                                             <%= event.location %>
                                         </p>
                                     </li>
-                                    <li class="d-flex">
+                                    <li class="d-flex mb-3">
                                         <p><b>Details:</b>
                                             <%= event.details %>
+                                        </p>
+                                    </li>
+                                    <li class="d-flex">
+                                        <p><b>Category:</b>
+                                            <%= event.category.charAt(0).toUpperCase() + event.category.slice(1) %>
                                         </p>
                                     </li>
                                 </ul>

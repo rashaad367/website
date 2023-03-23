@@ -14,19 +14,28 @@ exports.new = (req, res) => {
 
 exports.create = (req, res, next) => {
     let event = new model(req.body);
-    let image = "/images/" + req.file.filename;
+    // if file is not choosen then image is null and error pops up from schema
+    let image;
+    if (!req.file) {
+        image = null;
+    } else {
+        image = "/images/" + req.file.filename;
+    }
     // image path
     event.image = image;
-    // format date
-    const startDateTime = DateTime.fromJSDate(new Date(event.startDate)).toISO();
-    const endDateTime = DateTime.fromJSDate(new Date(event.endDate)).toISO();
-    event.startDate = startDateTime;
-    event.endDate = endDateTime;
+    // format date if user selects a date otherwise dates are left as null
+    if (req.body.startDate && req.body.endDate) {
+        const startDateTime = DateTime.fromJSDate(new Date(event.startDate)).toISO();
+        const endDateTime = DateTime.fromJSDate(new Date(event.endDate)).toISO();
+        event.startDate = startDateTime;
+        event.endDate = endDateTime;
+    }
     event.save()
         .then(event => res.redirect('/events'))
         .catch(err => {
             if (err.name === 'ValidationError') {
                 err.status = 400;
+                return next(err);
             }
             next(err);
         });
@@ -34,6 +43,11 @@ exports.create = (req, res, next) => {
 
 exports.show = (req, res, next) => {
     let id = req.params.id;
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        let err = new Error('Invalid event id');
+        err.status = 400;
+        return next(err);
+    }
     model.findById(id)
         .then(event => {
             if (event) {
@@ -49,6 +63,12 @@ exports.show = (req, res, next) => {
 
 exports.edit = (req, res, next) => {
     let id = req.params.id;
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        let err = new Error('Invalid event id');
+        err.status = 400;
+        return next(err);
+    }
+
     model.findById(id)
         .then(event => {
             if (event) {
@@ -70,9 +90,22 @@ exports.edit = (req, res, next) => {
 exports.update = (req, res, next) => {
     let event = req.body;
     let id = req.params.id;
-    let image = "/images/" + req.file.filename;
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        let err = new Error('Invalid event id');
+        err.status = 400;
+        return next(err);
+    }
+    // if file is not choosen then image is null and error pops up from schema
+    let image;
+    if (!req.file) {
+        image = null;
+    } else {
+        image = "/images/" + req.file.filename;
+    }
+
     // image path
     event.image = image;
+
     // format date
     const startDateTime = DateTime.fromJSDate(new Date(event.startDate)).toISO();
     const endDateTime = DateTime.fromJSDate(new Date(event.endDate)).toISO();
@@ -91,13 +124,19 @@ exports.update = (req, res, next) => {
         .catch(err => {
             if (err.name === 'ValidationError') {
                 err.status = 400;
-                next(err);
+                return next(err);
             }
+            next(err);
         });
 };
 
 exports.delete = (req, res, next) => {
     let id = req.params.id;
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        let err = new Error('Invalid event id');
+        err.status = 400;
+        return next(err);
+    }
 
     model.findByIdAndDelete(id, { useFindAndModify: false })
         .then(event => {

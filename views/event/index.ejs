@@ -6,34 +6,30 @@
         <main class="container">
             <div class="row">
                 <div class="col-sm-14 col-md-13 col-lg-12 col-xl-11">
-                    <div id="pg-main-text">
-                        <ul id="pg-main-list1">
-                            <% if(events.length) {%>
-                                <h3 id="pg-header1">Meetups</h3>
-                                <% events.forEach(event=> {%>
-                                    <% if(event.category==='meetup' ) {%>
-                                        <li class="d-flex mb-3"><a href="events/<%=event.id%>">
-                                                <%= event.title%>
-                                            </a></li>
-                                        <%}%>
-                                            <%});%>
-                        </ul>
-                        <ul id="pg-main-list2">
-                            <h3 id="pg-header2">Workshops</h3>
-                            <% events.forEach(event=> {%>
-                                <% if(event.category==='workshop' ) {%>
-                                    <li class="d-flex mb-3"><a href="events/<%=event.id%>">
-                                            <%= event.title%>
-                                        </a></li>
-                                    <%}%>
-                                        <%});%>
+                    <div id="pg-main-text" class="d-flex justify-content-between mx-5">
+                        <% const categories=['hackathon', 'meetup' , 'project session' , 'mini bootcamp' , 'party'
+                            , 'other' ]; %>
+                            <% categories.forEach((category, index)=> { %>
+                                <% const categoryEvents=events.filter(event=> event.category === category); %>
+                                    <% if (categoryEvents.length) { %>
+                                        <ul id="pg-main-list<%= index + 1 %>">
+                                            <h3 id="pg-header<%= index + 1 %>">
+                                                <%= category.charAt(0).toUpperCase() + category.slice(1) + 's' %>
+                                            </h3>
+                                            <% categoryEvents.forEach(event=> { %>
+                                                <li class="d-flex mb-3">
+                                                    <a href="events/<%= event.id %>">
+                                                        <%= event.title %>
+                                                    </a>
+                                                </li>
+                                                <% }); %>
+                                        </ul>
+                                        <% } %>
+                                            <% }); %>
 
-                        </ul>
-                        <%} else { %>
-                            <h3>There are no code meetups or workshops available currently.</h3>
-                            <% } %>
-
-
+                                                <% if (!events.length) { %>
+                                                    <h3>There are no events available currently.</h3>
+                                                    <% } %>
                     </div>
                 </div>
             </div>

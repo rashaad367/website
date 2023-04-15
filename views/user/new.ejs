@@ -1,0 +1,45 @@
+<%- include('../partials/meta.ejs') %>
+    <title>Sign Up</title>
+
+    <link rel='stylesheet' href='/css/index.css'>
+    <%- include('../partials/header.ejs') %>
+        <main class="container">
+            <div class="col-sm-14 col-md-13 col-lg-12 col-xl-11">
+                <h3 id="pg-header">Sign Up</h3>
+                <form action="/users" method="POST" class="user-form">
+                    <div class="form-group row">
+                        <label for="firstName" class="col-sm-3 col-form-label text-end">First Name:</label>
+                        <div class="col-sm-3">
+                            <input type="text" id="firstName" name="firstName" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lastName" class="col-sm-3 col-form-label text-end">Last Name:</label>
+                        <div class="col-sm-3">
+                            <input type="text" id="lastName" name="lastName" class="form-control form-control-sm"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label text-end">Email Address:</label>
+                        <div class="col-sm-3">
+                            <input type="email" id="email" name="email" class="form-control form-control-sm" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-3 col-form-label text-end">Password:</label>
+                        <div class="col-sm-3">
+                            <input type="password" id="password" name="password" class="form-control form-control-sm"
+                                minlength="8" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3 offset-sm-3">
+                            <input type="submit" value="Sign Up" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+        </div>
+        <%- include('../partials/footer.ejs') %>

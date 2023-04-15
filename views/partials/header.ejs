@@ -10,6 +10,9 @@
     crossorigin="anonymous"></script>
 </head>
 
+<!--Allows the closing of flash messages-->
+<script src="/javascript/closeFlash.js"></script>
+
 <body>
     <header class="custom-bg container-fluid">
         <div class="row">
@@ -18,9 +21,18 @@
                     <a href="/"><img src="/images/te-logos-cropped.jpeg" alt="logo" class="img-fluid"
                             id="logo-image"></a>
                     <ul class="list-inline my-auto" id="nav1-options">
-                        <li class="list-inline-item me-4"><a href="/events/new">New Event</a></li>
-                        <li class="list-inline-item me-4"><a href="#">Sign up</a></li>
-                        <li class="list-inline-item"><a href="#">Login</a></li>
+                        <ul class="list-inline my-auto" id="nav1-options">
+                            <% if (!user) { %>
+                                <li class="list-inline-item me-4"><a href="/users/new">Sign up</a></li>
+                                <li class="list-inline-item"><a href="/users/login">Login</a></li>
+                                <% } else { %>
+                                    <li class="list-inline-item me-4"><a href="/events/new">New Event</a></li>
+                                    <li class="list-inline-item me-4"><a href="/users/profile">
+                                            <%= name %>'s Profile
+                                        </a></li>
+                                    <li class="list-inline-item me-4"><a href="/users/logout">Logout</a></li>
+                                    <% } %>
+                        </ul>
                     </ul>
                 </nav>
                 <hr class="mx-auto d-block">
@@ -30,3 +42,24 @@
             </div>
         </div>
     </header>
+    <div class="content">
+
+
+        <% if(errorMessages.length> 0) {%>
+            <% errorMessages.forEach(message=>{%>
+                <div class='flash-message error'>
+                    <%=message%>
+                        <i class="fa-solid fa-x"></i>
+                </div>
+                <%});%>
+                    <%}%>
+
+                        <% if(successMessages.length> 0) {%>
+
+                            <% successMessages.forEach(message=>{%>
+                                <div class='flash-message success'>
+                                    <%=message%>
+                                        <i class="fa-solid fa-x"></i>
+                                </div>
+                                <%});%>
+                                    <%}%>

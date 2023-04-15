@@ -9,7 +9,7 @@ const eventSchema = new Schema({
         type: String, required: [true, 'category is required'],
         enum: ['hackathon', 'meetup', 'project session', 'mini bootcamp', 'party', 'other']
     },
-    hostName: { type: String, required: [true, 'host name is required'] },
+    hostName: { type: Schema.Types.ObjectId, ref: 'User' },
     startDate: { type: Date, required: [true, 'start date is required'] },
     endDate: { type: Date, required: [true, 'end date is required'] },
     details: { type: String, required: [true, 'details are required'] },

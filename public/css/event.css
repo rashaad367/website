@@ -81,6 +81,29 @@ footer i:hover {
     color: rgb(85, 193, 230);
 }
 
+.flash-message {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.success {
+    background-color: #4CAF50;
+}
+
+.error {
+    background-color: #f44336;
+}
+
+.fa-x {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    margin-top: 0.35%;
+}
+
 @media only screen and (min-width: 80px) and (max-width: 480px) {
     main {
         position: relative;

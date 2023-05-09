@@ -12,36 +12,62 @@
                                 <%=event.title%>
                             </h3>
                         </div>
+                        <div class="d-flex align-items-center">
+                            <span>Going?</span>
+                            <form action="/events/<%= event.id %>/rsvp" method="POST" class="me-2">
+                                <button type="submit" class="btn btn-outline-primary btn-sm mx-3" id="status"
+                                    name="status" value="YES">
+                                    Yes
+                                </button>
+                            </form>
+                            <form action="/events/<%= event.id %>/rsvp" method="POST" class="me-2">
+                                <button type="submit" class="btn btn-outline-primary btn-sm me-3" id="status"
+                                    name="status" value="NO">
+                                    No
+                                </button>
+                            </form>
+                            <form action="/events/<%= event.id %>/rsvp" method="POST" class="me-2">
+                                <button type="submit" class="btn btn-outline-primary btn-sm" id="status" name="status"
+                                    value="MAYBE">Maybe</button>
+                            </form>
+                        </div>
                         <div class="d-flex">
                             <div id="picture"><img src="<%= event.image%>" alt="event" class="img-fluid"
                                     id="event-picture" width="244px" height="180px">
                             </div>
                             <div id="pg-main-text">
                                 <ul id="pg-main-list">
-                                    <li class="d-flex mb-3">
+                                    <li class="d-flex mb-1">
                                         <p><b>Host:</b>
                                             <%= event.hostName.firstName + ' ' + event.hostName.lastName %>
                                         </p>
                                     </li>
-                                    <li class="d-flex mb-3">
+                                    <li class="d-flex mb-1">
                                         <p><b>Date and time:</b>
-                                            <%=event.startDate%> -
-                                                <%=event.endDate%>
+                                            <% if (event.startDate && event.endDate) { %>
+                                                <%= event.startDate.toLocaleString() %> - <%=
+                                                        event.endDate.toLocaleString() %>
+                                                        <% } %>
                                         </p>
                                     </li>
-                                    <li class="d-flex mb-3">
+                                    <li class="d-flex mb-1">
                                         <p><b>Location:</b>
                                             <%= event.location %>
                                         </p>
                                     </li>
-                                    <li class="d-flex mb-3">
+                                    <li class="d-flex mb-1">
                                         <p><b>Details:</b>
                                             <%= event.details %>
                                         </p>
                                     </li>
-                                    <li class="d-flex">
+                                    <li class="d-flex mb-1">
                                         <p><b>Category:</b>
                                             <%= event.category.charAt(0).toUpperCase() + event.category.slice(1) %>
+                                        </p>
+                                    </li>
+                                    <li class="d-flex">
+                                        <p><b>Number of rsvps:</b>
+                                            <%= count%>
                                         </p>
                                     </li>
                                 </ul>

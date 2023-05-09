@@ -21,6 +21,7 @@
                                                 </a>
                                             </h5>
                                         </div>
+                                        <div class="card-divider"></div>
                                         <div class="actions d-flex">
                                             <form action="/events/<%= event.id %>/edit" method="GET" class="me-2">
                                                 <button type="submit" class="btn btn-primary">
@@ -42,6 +43,35 @@
                     <% } else { %>
                         <p>You have not created any events.</p>
                         <% } %>
+
+                            <% if (rsvps.length) { %>
+                                <div class="row">
+                                    <p>You have set the following rsvps:</p>
+                                    <% rsvps.forEach(rsvp=> { %>
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card">
+                                                <div class="card-body d-flex justify-content-between">
+                                                    <div class="title">
+                                                        <h5 class="card-title">
+                                                            <a href="/events/<%= rsvp.event.id %>">
+                                                                <%= rsvp.event.title %>
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="card-divider"></div>
+                                                    <div class="going d-flex">
+                                                        <h5>
+                                                            Status: <%= rsvp.status%>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }); %>
+                                </div>
+                                <% } else { %>
+                                    <p>You have not set any rsvps.</p>
+                                    <% } %>
 
             </div>
         </main>

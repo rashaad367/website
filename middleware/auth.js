@@ -42,3 +42,49 @@ exports.isHost = (req, res, next) => {
         })
         .catch(err => next(err));
 };
+
+// Check if user is host of a event
+exports.isHost = (req, res, next) => {
+    let id = req.params.id;
+
+    Event.findById(id)
+        .then(event => {
+            if (event) {
+                if (event.hostName == req.session.user) {
+                    return next();
+                } else {
+                    let err = new Error('Unauthorized to access the resource');
+                    err.status = 401;
+                    return next(err);
+                }
+            } else {
+                let err = new Error('Cannot find a event with id ' + id);
+                err.status = 404;
+                return next(err);
+            }
+        })
+        .catch(err => next(err));
+};
+
+// Check if user is not the host of a event
+exports.isNotHost = (req, res, next) => {
+    let id = req.params.id;
+
+    Event.findById(id)
+        .then(event => {
+            if (event) {
+                if (event.hostName == req.session.user) {
+                    let err = new Error('Unauthorized to access the resource');
+                    err.status = 401;
+                    return next(err);
+                } else {
+                    return next();
+                }
+            } else {
+                let err = new Error('Cannot find a event with id ' + id);
+                err.status = 404;
+                return next(err);
+            }
+        })
+        .catch(err => next(err));
+};

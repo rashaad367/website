@@ -87,6 +87,12 @@ i:hover {
     margin-top: 0.35%;
 }
 
+.card-divider {
+    border-left: 1px solid #ccc;
+    height: 100%;
+    margin: 0 10px;
+}
+
 @media only screen and (min-width: 80px) and (max-width: 480px) {
     main {
         position: relative;

@@ -10,15 +10,17 @@ const eventRoutes = require('./routes/eventRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
 const { fileUpload } = require('./middleware/fileUpload');
+const dotenv = require('dotenv');
 
 // create app
 const app = express();
+dotenv.config();
 
 // configure app
-const passwd = encodeURIComponent("vwG1QQnmCYmWCZT3");
+const passwd = encodeURIComponent(process.env.DB_PASSWORD);
 let port = 3000;
 let host = 'localhost';
-let url = "mongodb+srv://rjone177:" + passwd + "@cluster0.mc0b5ro.mongodb.net/project3?retryWrites=true&w=majority";
+let url = process.env.DB_ACCOUNT + passwd + process.env.DB_CLUSTER;
 app.set('view engine', 'ejs');
 
 //connect to MongoDB
@@ -34,7 +36,7 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 // mount middleware
 app.use(
     session({
-        secret: "afj2o93f09j09ajf902j0s",
+        secret: process.env.SECRET,
         resave: false,
         saveUninitialized: false,
         store: new MongoStore({ mongoUrl: url }),
